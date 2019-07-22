@@ -17,14 +17,26 @@
     <script src="${path}/js/index.js"></script>
 </head>
 
-<body>
-
 <div class="container">
-    <div class="logo" style="background-image: url(${path}/images/projectlogo.png)">
+    <div style="margin-left: 140px;margin-bottom: 66px;">
+        <div>
+            <img class="logo" src="${path}/images/logo.png" >
+            <span style="text-align:center; font:normal 14px/24px 'MicroSoft YaHei';position: absolute;">
+                <a href="" target="_blank" style="text-decoration: none;">
+                    <img src="${path}/images/font.png" alt="" style="width: 280px;">
+                </a>
+            </span>
+        </div>
+
     </div>
     <div class="input">
+        <span class="map">
+            <img src="${path}/images/map.png" alt="" style="width: 30px;vertical-align: middle;">
+        </span>
+        <span class="picker">
+            <img src="${path}/images/down.png" alt="">
+        </span>
         <input type="text" placeholder="请输入要搜索的内容" autocomplete="off" id="search-input">
-        <div class="picker"></div>
         <div class="hot-list"></div>
         <ul class="picker-list">
             <li ></li>
@@ -41,9 +53,6 @@
         helangSearch.init();
     })
 </script>
-<div style="text-align:center;margin:100px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-    <p><a href="http://sc.chinaz.com/" target="_blank">阳煤集团瓦斯防控技术管理系统</a></p>
-</div>
 </body>
 
 
