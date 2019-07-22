@@ -10,7 +10,7 @@ var helangSearch={
         /* 颜色 */
         color:['#ff2c00','#ff5a00','#ff8105','#fd9a15','#dfad1c','#6bc211','#3cc71e','#3cbe85','#51b2ef','#53b0ff'],
         /* 列表 */
-        list:[
+        /*list:[
             '网页特效',
             'jQuery特效',
             'web前端代码',
@@ -20,7 +20,7 @@ var helangSearch={
             '表单美化',
             '评论',
             'QQ表情'
-        ]
+        ]*/
     },
     /* 初始化 */
     init:function(){
@@ -57,17 +57,18 @@ var helangSearch={
         });
         /* 搜索类别选择列表 */
         this.els.pickerList.on("click",">li",function () {
-            _this.els.logo.css("background-image",('url(img/'+$(this).data("logo")+')'));
-            _this.searchIndex=$(this).index();
+            /*_this.els.logo.css("background-image",('url(img/'+$(this).data("logo")+')'));
+            _this.searchIndex=$(this).index();*/
+
         });
         /* 搜索 输入框 点击*/
-        this.els.input.click(function () {
+       /* this.els.input.click(function () {
             if(!$(this).val()){
                 setTimeout(function () {
                     _this.els.hotList.show();
                 },100);
             }
-        });
+        });*/
         /* 搜索 输入框 输入*/
         this.els.input.on("input",function () {
             if($(this).val()){
@@ -75,10 +76,10 @@ var helangSearch={
             }
         });
         /* 搜索按钮 */
-        this.els.button.click(function () {
+        /*this.els.button.click(function () {
             var searchArr=['百度','搜狗','必应','谷歌'];
             alert(searchArr[_this.searchIndex]+"搜索："+_this.els.input.val());
-        });
+        });*/
         /* 文档 */
         $(document).click(function () {
             _this.els.pickerList.hide();

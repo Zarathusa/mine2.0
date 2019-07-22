@@ -1,13 +1,12 @@
 package com.xpf.controller;
 
-import javax.servlet.http.HttpSession;
-
+import com.xpf.entity.User;
+import com.xpf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xpf.entity.User;
-import com.xpf.service.UserService;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("user")
@@ -22,7 +21,7 @@ public class UserController {
 		String validationCode=(String)session.getAttribute("validationCode");
 		if(user!=null&&validationCode.equals(enCode)){
 			session.setAttribute("user", user);
-			return "redirect:/mineInfo/showAll";
+			return "redirect:/main/index.jsp";
 		}
 		return "redirect:/login.jsp";
 	}

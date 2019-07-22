@@ -18,12 +18,12 @@
 </head>
 
 <div class="container">
-    <div style="margin-left: 140px;margin-bottom: 66px;">
+    <div style="margin-left: 80px;margin-bottom: 80px;">
         <div>
             <img class="logo" src="${path}/images/logo.png" >
             <span style="text-align:center; font:normal 14px/24px 'MicroSoft YaHei';position: absolute;">
                 <a href="" target="_blank" style="text-decoration: none;">
-                    <img src="${path}/images/font.png" alt="" style="width: 280px;">
+                    <img src="${path}/images/font.png" alt="" style="width: 400px;">
                 </a>
             </span>
         </div>
@@ -38,11 +38,14 @@
         </span>
         <input type="text" placeholder="请输入要搜索的内容" autocomplete="off" id="search-input">
         <div class="hot-list"></div>
-        <ul class="picker-list">
-            <li ></li>
-            <li ></li>
-            <li ></li>
-            <li ></li>
+        <ul id="cate" class="picker-list">
+            <li value="1">基础理论研究</li>
+            <li value="2">探测、预测及预警技术</li>
+            <li value="3">增透及抽采技术</li>
+            <li value="4">管理体系</li>
+            <li value="5">钻进技术及装备</li>
+            <li value="6">瓦斯利用技术</li>
+            <li value="7">其他</li>
         </ul>
     </div>
     <div class="search"></div>
@@ -51,6 +54,12 @@
 <script type="text/javascript">
     $(function(){
         helangSearch.init();
+        var cate;
+        $("#cate > li").click(function () {
+            var content=$(this).text();
+            cate=$(this).val();
+            $("#search-input").prop("placeholder","技术分类选定为："+content+"");
+        })
     })
 </script>
 </body>
