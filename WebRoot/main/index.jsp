@@ -22,7 +22,7 @@
         <div>
             <img class="logo" src="${path}/images/logo.png" >
             <span style="text-align:center; font:normal 14px/24px 'MicroSoft YaHei';position: absolute;">
-                <a href="" target="_blank" style="text-decoration: none;">
+                <a href="${path}/mineInfo/showAll" target="_blank" style="text-decoration: none;">
                     <img src="${path}/images/font.png" alt="" style="width: 400px;">
                 </a>
             </span>
@@ -48,17 +48,24 @@
             <li value="7">其他</li>
         </ul>
     </div>
-    <div class="search"></div>
+    <div id="query" class="search"></div>
 </div>
 
 <script type="text/javascript">
     $(function(){
         helangSearch.init();
-        var cate;
+
+        var cate="";
         $("#cate > li").click(function () {
             var content=$(this).text();
             cate=$(this).val();
             $("#search-input").prop("placeholder","技术分类选定为："+content+"");
+        })
+
+        $("#query").click(function () {
+            var context=$("#search-input").val();
+            window.location.href="${path}/mineInfo/indexQuery?category="+cate+"&context="+context+"";
+            console.log("test")
         })
     })
 </script>

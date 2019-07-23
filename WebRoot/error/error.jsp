@@ -11,7 +11,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>404-对不起！您访问的页面不存在</title>
+    <title>出现错误啦！</title>
 
     <style type="text/css">
 
@@ -36,13 +36,13 @@
 
 <body bgcolor="#494949">
 
-<div class="head404"></div>
-
 <div class="txtbg404">
 
     <div class="txtbox">
 
-        <p>对不起，您请求的页面不存在、或已被删除、或暂时不可用</p>
+        <p>出现错误啦！！!赶快联系开发人员</p>
+
+        <p>${message}</p>
 
         <p class="paddingbox">请点击以下链接继续浏览网页</p>
 

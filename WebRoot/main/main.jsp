@@ -50,7 +50,11 @@
 				}
 			}
 		})
-    
+
+		/*返回搜索主页*/
+		$("#backIndex").click(function(){
+			window.location.href="${path}/main/index.jsp";
+		})
 	});
 	
 	/* 刪除项目 */
@@ -71,10 +75,14 @@
 <div class="row">
 <div class="col-sm-12">
 	<div class="page-header">
-  		<h3>&nbsp;&nbsp;项目展示 
+  		<h3>&nbsp;&nbsp;项目展示
+			<div class="pull-right">
   			<c:if test="${sessionScope.user.status==1}">
-  				<button type="button" id="addProject" class="btn btn-primary pull-right">增加项目 <span class="glyphicon glyphicon-plus"></span></button>
+  				<button type="button" id="addProject" class="btn btn-primary">增加项目 <span class="glyphicon glyphicon-plus"></span></button>
   			</c:if>
+			&nbsp;&nbsp;
+			<button type="button" id="backIndex" class="btn btn-success pull-right">返回搜索 <span class="glyphicon glyphicon-share-alt"></span></button>
+			</div>
   		</h3>
 	</div>
 </div>
@@ -160,7 +168,7 @@
 		class="disabled"
 	</c:if>
      >
-      <a href='<c:url value="/mineInfo/showAll"/>?pageNum=${pageInfo.pageNum-1}' >
+      <a href='<c:url value="/mineInfo/indexQuery"/>?pageNum=${pageInfo.pageNum-1}&category=${category}&context=${context}' >
         <span >&laquo;</span>
       </a>
     </li>
@@ -170,7 +178,7 @@
 		<c:if test="${page_num == pageInfo.pageNum}">
 			class="active"
 		</c:if>
-		><a href="<c:url value='/mineInfo/showAll'/>?pageNum=${page_num}">${page_num}</a></li>
+		><a href="<c:url value='/mineInfo/indexQuery'/>?pageNum=${page_num}&category=${category}&context=${context}">${page_num}</a></li>
 	</c:forEach>
     <!-- 下一页 -->
     <li
@@ -178,7 +186,7 @@
 		class="disabled"
 	</c:if>
     >
-      <a href='<c:url value="/mineInfo/showAll"/>?pageNum=${pageInfo.pageNum+1}'>
+      <a href='<c:url value="/mineInfo/indexQuery"/>?pageNum=${pageInfo.pageNum+1}&category=${category}&context=${context}'>
         <span >&raquo;</span>
       </a>
     </li>

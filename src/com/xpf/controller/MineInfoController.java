@@ -27,11 +27,36 @@ public class MineInfoController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping("showAll")
-	public ModelAndView showAll(String projectName,@RequestParam(defaultValue="1")Integer pageNum){
-		PageInfo<MineInfo> pageInfo = mineInfoService.queryMineInfo(projectName, pageNum, 3);
+	/**
+	 * 项目查询
+	 * @param category 技术分类
+	 * @param context  内容
+	 * @param pageNum  页码
+	 * @return
+	 */
+	@RequestMapping("indexQuery")
+	public ModelAndView indexQuery(String category,String context,@RequestParam(defaultValue="1")Integer pageNum){
+		PageInfo<MineInfo> pageInfo = mineInfoService.indexQuery(category, context, pageNum,3);
 		ModelAndView view = new ModelAndView();
 		view.addObject("pageInfo",pageInfo);
+		view.addObject("category",category);
+		view.addObject("context",context);
+		view.setViewName("main/main");
+		return view;
+	}
+
+	/**
+	 * 进入项目主页
+	 * @param context
+	 * @param pageNum
+	 * @return
+	 */
+	@RequestMapping("showAll")
+	public ModelAndView showAll(String context,@RequestParam(defaultValue="1")Integer pageNum){
+		PageInfo<MineInfo> pageInfo = mineInfoService.queryMineInfo(context, pageNum, 3);
+		ModelAndView view = new ModelAndView();
+		view.addObject("pageInfo",pageInfo);
+		view.addObject("context",context);
 		view.setViewName("main/main");
 		return view;
 	}
@@ -65,11 +90,12 @@ public class MineInfoController {
 			view.setViewName("main/managerInsert");
 		}else if("detail".equals(op)){
 			//技术分类
-			Category category = categoryService.findById(Integer.parseInt(mineInfo.getTechCategory()));
-			if(StringUtils.isNotBlank(category.getName())){
-				view.addObject("techCategory",category.getName());
+			if(StringUtils.isNotBlank(mineInfo.getTechCategory())){
+				Category category = categoryService.findById(Integer.parseInt(mineInfo.getTechCategory()));
+				if(StringUtils.isNotBlank(category.getName())){
+					view.addObject("techCategory",category.getName());
+				}
 			}
-
 			view.setViewName("main/detail");
 		}else if("report".equals(op)){
 			view.setViewName("main/report");
@@ -84,11 +110,11 @@ public class MineInfoController {
 	}
 	
 	@RequestMapping("updateManager")
-	public String updateManager(MineInfo mineInfo,@RequestParam("organUpload")MultipartFile organUpload,
-			@RequestParam("workProceUpload")MultipartFile workProceUpload,@RequestParam("workFileUpload")MultipartFile workFileUpload,
-			@RequestParam("operProceUpload")MultipartFile operProceUpload,
-			@RequestParam("manageRespUpload")MultipartFile manageRespUpload,HttpSession session
-			){
+	public String updateManager(MineInfo mineInfo, @RequestParam("organUpload") MultipartFile organUpload,
+								@RequestParam("workProceUpload") MultipartFile workProceUpload, @RequestParam("workFileUpload") MultipartFile workFileUpload,
+								@RequestParam("operProceUpload") MultipartFile operProceUpload,
+								@RequestParam("manageRespUpload") MultipartFile manageRespUpload, HttpSession session
+	) {
 		if(!organUpload.isEmpty()){
 			String organ = upload("organUpload",organUpload,session);
 			mineInfo.setOrgan(organ);

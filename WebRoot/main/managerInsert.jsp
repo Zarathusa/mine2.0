@@ -19,15 +19,20 @@
 			success:function (data) {
 				data=data.list;
 				for(var i=0;i<data.length;i++){
-					if(data[i].id==${mineInfo.techCategory}){
-						$("#techCategory ").append($("<option value="+data[i].id+" selected='selected'>"+data[i].name+"</option>"));
-					}else {
-						$("#techCategory ").append($("<option value="+data[i].id+">"+data[i].name+"</option>"));
-					}
+					<c:if test="${mineInfo.techCategory!=null}">
+						if(data[i].id==${mineInfo.techCategory}){
+							$("#techCategory ").append($("<option value="+data[i].id+" selected='selected'>"+data[i].name+"</option>"));
+						}else {
+					</c:if>
+							$("#techCategory ").append($("<option value="+data[i].id+">"+data[i].name+"</option>"));
+					<c:if test="${mineInfo.techCategory!=null}">
+						}
+					</c:if>
 
 				}
 			}
 		})
+
 	});
 	
 	function show_div(value){

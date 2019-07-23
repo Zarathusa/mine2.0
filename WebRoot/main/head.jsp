@@ -96,7 +96,7 @@
         </ul>
         <form action="<c:url value='/mineInfo/showAll'/>" method="post" class="navbar-form navbar-right" >
 			  <div class="form-group">
-			    <input type="text" name="projectName" class="form-control" placeholder="请输入项目名">
+			    <input type="text" name="context" class="form-control" placeholder="请输入项目名" value="${context}">
 			  </div>
 			  <input type="submit" class="btn btn-default" value="搜索">
 		</form>

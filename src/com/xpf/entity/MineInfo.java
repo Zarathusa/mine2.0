@@ -204,6 +204,9 @@ public class MineInfo {
 	@Column
 	private String projectReport;
 
+	/**
+	 * 技术分类
+	 */
 	@Column
 	private String techCategory;
 	

@@ -15,4 +15,6 @@ public interface MineInfoService {
 	MineInfo queryOne(Integer id);
 	
 	void updateMineInfo(MineInfo mineInfo);
+
+	PageInfo<MineInfo> indexQuery(String category,String context,Integer pageNum,Integer pageSize);
 }
