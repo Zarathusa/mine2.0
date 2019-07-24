@@ -56,7 +56,7 @@
 <div class="container">
 		<form action="<c:url value='/mineInfo/updateManager' />" method="post" enctype="multipart/form-data">
 			
-			<input  name="id" style="display:none;" value="${mineInfo.id}" class="form-control"/>
+			<input id="id" name="id" style="display:none;" value="${mineInfo.id}" class="form-control"/>
 			
 			<div class="row">
 				<div class="form-group">
@@ -90,8 +90,8 @@
 			
 			<div class="row">
 				<div class="form-group">
-					<label for="organUpload">组织机构:</label> 
-					<input type="file" id="organUpload" name="organUpload">
+					<label for="singleUpload">组织机构:</label>
+					<input type="file" id="singleUpload" name="singleFile" value="organ">
 					<p class="help-block">请上传组织机构文件（pdf/word文件，若文件较大，请上传pdf格式文件）</p>
 				</div>
 			</div>
@@ -216,3 +216,8 @@
 
 </div>
 </body>
+<script src="${path}/fileinput/js/locales/zh.js" type="text/javascript"></script>
+<script src="${path}/fileinput/js/myfileuplod.js"></script>
+<script>
+	initFileInput();
+</script>

@@ -4,8 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.xpf.entity.Category;
 import com.xpf.entity.MineInfo;
 import com.xpf.service.CategoryService;
+import com.xpf.service.FileService;
 import com.xpf.service.MineInfoService;
-import com.xpf.util.XDocService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.util.Date;
 
 @Controller
 @RequestMapping("mineInfo")
@@ -26,6 +24,8 @@ public class MineInfoController {
 	private MineInfoService mineInfoService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private FileService fileService;
 
 	/**
 	 * 项目查询
@@ -97,7 +97,15 @@ public class MineInfoController {
 				}
 			}
 			view.setViewName("main/detail");
-		}else if("report".equals(op)){
+		}
+		//项目报告
+		else if("report".equals(op)){
+			if(fileService.getByDataId(id,"report").size()>0){
+				view.addObject("file",fileService.getByDataId(id,"report").get(0));
+			}else {
+				view.addObject("file",null);
+			}
+
 			view.setViewName("main/report");
 		}
 		return view;
@@ -115,85 +123,13 @@ public class MineInfoController {
 								@RequestParam("operProceUpload") MultipartFile operProceUpload,
 								@RequestParam("manageRespUpload") MultipartFile manageRespUpload, HttpSession session
 	) {
-		if(!organUpload.isEmpty()){
-			String organ = upload("organUpload",organUpload,session);
-			mineInfo.setOrgan(organ);
-		}
-		if(!workProceUpload.isEmpty()){
-			String workProce = upload("workProceUpload",workProceUpload,session);
-			mineInfo.setWorkProce(workProce);
-		}
-		if(!workFileUpload.isEmpty()){
-			String workFile = upload("workFileUpload",workFileUpload,session);
-			mineInfo.setWorkFile(workFile);
-		}
-		if(!operProceUpload.isEmpty()){
-			String operProce = upload("operProceUpload",operProceUpload,session);
-			mineInfo.setOperProce(operProce);
-		}
-		if(!manageRespUpload.isEmpty()){
-			String manageRespFile = upload("manageRespUpload",manageRespUpload,session);
-			mineInfo.setManageRespFile(manageRespFile);
-		}
+
 		mineInfoService.updateMineInfo(mineInfo);
 		return "redirect:/mineInfo/showAll";
 	}
 	
-	@RequestMapping("updateReport")
-	public String updateReport(Integer id,@RequestParam("reportUpload")MultipartFile reportUpload,HttpSession session){
-		if(!reportUpload.isEmpty()){
-			String report = upload("reportUpload", reportUpload, session);
-			MineInfo mineInfo = new MineInfo();
-			mineInfo.setId(id);
-			mineInfo.setProjectReport(report);
-			mineInfoService.updateMineInfo(mineInfo);
-		}
-		return "redirect:/mineInfo/showAll";
-	}
+
+
 	
-	
-	
-	/**
-	 * 
-	 * @param dir
-	 * @param upload
-	 * @param session
-	 * @return
-	 */
-	public String upload(String dir,MultipartFile upload,HttpSession session){
-		//获取文件名
-		String filename = upload.getOriginalFilename();
-		//获取上传文件夹路径
-		String realPath = session.getServletContext().getRealPath("/"+dir);
-		//若没有文件夹则创建文件夹
-		File file = new File(realPath);
-		if(!file.exists()){
-			file.mkdir();
-		}
-		//给文件名加上时间戳，使文件名唯一，不会被覆盖
-		//linux中文文件名上传乱码（用英文代替）
-		String newName=new Date().getTime()+"-"+dir;
-		if(filename.endsWith(".pdf")){
-			try {
-				upload.transferTo(new File(realPath,newName+".pdf"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if(filename.endsWith(".docx")||filename.endsWith(".doc")){
-			//文件上传
-			try {
-				upload.transferTo(new File(realPath,newName+".docx"));
-				//再存一份pdf
-				XDocService service = new XDocService();
-				service.to(realPath+"/"+newName+".docx", new File(realPath+"/"+newName+".pdf"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		String url=null;
-		if(filename.endsWith(".pdf")||filename.endsWith(".docx")||filename.endsWith(".doc")){
-			url="/"+dir+"/"+newName;
-		}
-		return url;
-	}
+
 }

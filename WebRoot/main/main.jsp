@@ -275,7 +275,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!--模态框标题-->
-				<form action="<c:url value='/mineInfo/updateReport'/>" method="post" enctype="multipart/form-data" class="form-horizontal" >
+				<form action="<c:url value='/file/uploadReport'/>" method="post" enctype="multipart/form-data" class="form-horizontal" >
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span>&times; </span>

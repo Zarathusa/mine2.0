@@ -13,12 +13,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>阳泉矿区瓦斯差异化防控项目管理系统</title>
     <link rel="stylesheet" href="${path}/boot/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${path}/boot/css/back.css">
+    <link media="all"rel="stylesheet" type="text/css" href="${path}/boot/css/back.css">
     <link rel="stylesheet" href="${path}/boot/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="${path}/fileinput/css/fileinput.css">
     <script src="${path}/boot/js/jquery-3.3.1.min.js"></script>
     <script src="${path}/boot/js/bootstrap.min.js"></script>
     <script src="${path}/boot/js/bootstrapValidator.min.js"></script>
     <script src="${path}/boot/js/jquery.media.js"></script>
+    <script src="${path}/fileinput/js/fileinput.js" type="text/javascript"></script>
+
     <style type="text/css">
     	.navbar-brand {
 		    font-size: 25px;

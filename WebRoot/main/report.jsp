@@ -16,15 +16,15 @@
 			/*window.location.href="${path}/mineInfo/showAll";*/
 			window.history.back(-1);
 		});
-		
+
+		<c:if test="${file!=null}">
 		$("#projectReport").media({
 			width: '100%',
 			height: '1000px',
 			autoplay: true,
-        	src:"${path}${mineInfo.projectReport}.pdf",
+        	src:"http://localhost/xoffice/xoffice?_xformat=${file.fileType}&_file=http://localhost${path}${file.url}",
 		});
-		
-		
+		</c:if>
 	});
 	
 	function backTop () {
@@ -62,10 +62,10 @@
 	   				<h3 class="panel-title">${mineInfo.projectName}研究报告</h3>
 	  			</div>
 	  			<div class="panel-body">
-					<c:if test="${mineInfo.projectReport!=null}">
+					<c:if test="${file!=null}">
 	  					<div id="projectReport" ></div>
 	  				</c:if>
-	  				<c:if test="${mineInfo.projectReport==null}">
+	  				<c:if test="${file==null}">
 	  					请上传pdf/word文件
 	  				</c:if>
 				</div>

@@ -30,7 +30,22 @@
   		<servlet-name>springmvc</servlet-name>
   		<url-pattern>/</url-pattern>
   	</servlet-mapping>
-  	
+
+	<!-- xoffice -->
+	<servlet>
+		<servlet-name>XOfficeServlet</servlet-name>
+		<servlet-class>com.xpf.util.xoffice.XOfficeServlet</servlet-class>
+		<init-param>
+			<param-name>key</param-name>
+			<param-value/>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>XOfficeServlet</servlet-name>
+		<url-pattern>/xoffice</url-pattern>
+	</servlet-mapping>
+
   	<!-- 编码过滤器 -->
   	<filter>
   		<filter-name>charset</filter-name>
@@ -50,21 +65,6 @@
   		<filter-name>charset</filter-name>
   		<url-pattern>/*</url-pattern>
   	</filter-mapping>
-
-	<!-- xoffice -->
-	<servlet>
-		<servlet-name>XOfficeServlet</servlet-name>
-		<servlet-class>com.xpf.util.xoffice.XOfficeServlet</servlet-class>
-		<init-param>
-			<param-name>key</param-name>
-			<param-value></param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>XOfficeServlet</servlet-name>
-		<url-pattern>/xoffice</url-pattern>
-	</servlet-mapping>
 
 	<error-page>
 		<error-code>404</error-code>
